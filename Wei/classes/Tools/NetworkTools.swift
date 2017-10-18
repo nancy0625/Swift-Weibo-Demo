@@ -10,6 +10,9 @@ import UIKit
 import AFNetworking
 
 class NetworkTools: AFHTTPSessionManager {
+    public let appKey = "4063265301"
+    private let appSecret = "dd453737bd08752d8b71c68c98b66186"
+    public let redirectUrl = "http://www.baidu.com"
     //单例
     static let sharedTools: NetworkTools = {
         let tools = NetworkTools(baseURL: nil)
@@ -22,6 +25,7 @@ class NetworkTools: AFHTTPSessionManager {
    
 }
 extension NetworkTools{
+    
     func request(method:HMRequestMethod, URLString:String,
                  parameters:[String:AnyObject]?,
                  finished:@escaping HMRequestCallBack)
@@ -41,6 +45,12 @@ extension NetworkTools{
                 
             }
         }
+    //OAuth相关方法 
+    //授权URL
+    var OAuthURL:NSURL{
+        let urlString = "https://api.weibo.com/oauth2/authorize?client_id=\(appKey)&redirect_uri=\(redirectUrl)"
+        return NSURL(string: urlString)!
+    }
 
 }
 //HTTP请求

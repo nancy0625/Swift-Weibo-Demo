@@ -25,6 +25,9 @@ class VisitorTableViewController: UITableViewController {
         view = visitorView
         
         //view.backgroundColor = UIColor.white
+        //添加监听方法
+        visitorView?.registerButton.addTarget(self, action: #selector(VisitorTableViewController.visitorViewDidRegister), for: UIControlEvents.touchUpInside)
+        visitorView?.loginButton.addTarget(self, action: #selector(VisitorTableViewController.visitorviewDidLogin), for: UIControlEvents.touchUpInside)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,4 +111,15 @@ class VisitorTableViewController: UITableViewController {
     }
     */
 
+}
+//监听访客视图方法
+extension VisitorTableViewController{
+    func visitorViewDidRegister(){
+        print("注册")
+    }
+    func visitorviewDidLogin(){
+        let vc = OAuthViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
+    }
 }
