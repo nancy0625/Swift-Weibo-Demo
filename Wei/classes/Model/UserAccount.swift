@@ -30,7 +30,7 @@ class UserAccount: NSObject {
         let keys = ["access_token","expires_in","expiresDate","uid","screen_name","avatar_large"]
         return dictionaryWithValues(forKeys: keys).description
     }
-    // 过期日期
+    // 过期日期.....
     
     var expires_in: TimeInterval = 0{
         didSet {
