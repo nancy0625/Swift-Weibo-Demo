@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18A59F181FA1881D00B19ADE /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A59F171FA1881D00B19ADE /* UserAccount.swift */; };
 		18C387BF1F96FD9D00E70595 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C387BE1F96FD9D00E70595 /* OAuthViewController.swift */; };
 		18F97FAE1F8DC9EA00B18669 /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F97FAD1F8DC9EA00B18669 /* NetworkTools.swift */; };
 		3F8ABE911F68D50E00D9E4D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8ABE901F68D50E00D9E4D5 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18A59F171FA1881D00B19ADE /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
 		18C387BE1F96FD9D00E70595 /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		18F97FAD1F8DC9EA00B18669 /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
 		3E963B88956A52F810E00B1B /* Pods-Wei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wei.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wei/Pods-Wei.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		3F8ABEBF1F68D5A300D9E4D5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18A59F171FA1881D00B19ADE /* UserAccount.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				3F8ABECD1F68D65800D9E4D5 /* HomeTableViewController.swift in Sources */,
 				3F8ABECB1F68D61C00D9E4D5 /* MainViewController.swift in Sources */,
 				18C387BF1F96FD9D00E70595 /* OAuthViewController.swift in Sources */,
+				18A59F181FA1881D00B19ADE /* UserAccount.swift in Sources */,
 				3F8ABE931F68D50E00D9E4D5 /* ViewController.swift in Sources */,
 				3F8ABECF1F68D67C00D9E4D5 /* DiscoverTableViewController.swift in Sources */,
 				3FB2C5011F6A2B7600CC6E57 /* UIButton+Extension.swift in Sources */,
