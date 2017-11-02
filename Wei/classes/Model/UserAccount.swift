@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserAccount: NSObject {
+class UserAccount: NSObject,NSCoding{
     //用于调用access_token,接口获取授权后的access token
     var access_token:String?
     // 当授权用户的UID
@@ -39,6 +39,32 @@ class UserAccount: NSObject {
         }
     }
     var expiresDate: NSDate?
+    //归档
+    func encode(with aCoder:NSCoder){
+        aCoder.encode(access_token, forKey: "access_token")
+        aCoder.encode(expiresDate, forKey: "expiresDate")
+        aCoder.encode(screen_name, forKey: "screen_name")
+        aCoder.encode(avatar_large, forKey: "avatar_large")
+    }
+    //解档
+    required init(coder aDecoder:NSCoder) {
+        access_token = aDecoder.decodeObject(forKey: "access_token") as?String
+        expiresDate = aDecoder.decodeObject(forKey: "expiresDate") as?NSDate
+        uid = aDecoder.decodeObject(forKey: "uid") as?String
+        screen_name = aDecoder.decodeObject(forKey:"screen_name") as?String
+        avatar_large = aDecoder.decodeObject(forKey:"avatar_large") as?String
+        
+        
+    }
+    func saveUSerAccount(){
+        //保存路径
+        var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
+        path = (path as NSString).appendingPathComponent("account.plist")
+        //在实际开发中，一定要确认文件真的保存好了
+        print(path)
+        //归档保存
+        NSKeyedArchiver.archiveRootObject(self, toFile: path)
+    }
     
 }
 
