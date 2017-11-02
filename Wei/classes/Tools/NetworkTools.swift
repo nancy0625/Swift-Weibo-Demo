@@ -10,7 +10,16 @@ import UIKit
 import AFNetworking
 
 class NetworkTools: AFHTTPSessionManager {
+<<<<<<< HEAD
     
+=======
+    //加载用户信息
+    func loadUserInfo(uid:String,accessToken:String,finished:@escaping HMRequestCallBack){
+        let urlString = "https://api.weibo.com/2/users/show.json"
+        let params = ["uid":uid,"access_token":accessToken]
+        request(method: .GET, URLString: urlString, parameters: params as [String : AnyObject]?, finished: finished)
+    }
+>>>>>>> b11f3026ed22a46246da08739a2d0373025507e7
     
     
     
@@ -66,6 +75,7 @@ extension NetworkTools{
     }
     func loadAccessToken(code:String,finished:@escaping HMRequestCallBack){
         let urlString = "https://api.weibo.com/oauth2/access_token"
+<<<<<<< HEAD
         let params:[String:AnyObject]?=["client_id":appKey as
             AnyObject,"client_secret":appSecret as
             AnyObject,"grant_type":"authorization_code" as
@@ -80,6 +90,10 @@ extension NetworkTools{
         let params:[String:AnyObject]?=["uid":uid as AnyObject,"access_token":accessToken as AnyObject]
      
         request(method: .GET, URLString: urlString, parameters: params as [String : AnyObject]?, finished: finished)
+=======
+        let params = ["client_id":appKey,"client_secret":appSecret,"grant_type":"authorization_code","code":code,"redirect_uri":redirectUrl]
+        request(method: .POST, URLString: urlString, parameters: params as [String : AnyObject]?, finished: finished)
+>>>>>>> b11f3026ed22a46246da08739a2d0373025507e7
     }
 
 }

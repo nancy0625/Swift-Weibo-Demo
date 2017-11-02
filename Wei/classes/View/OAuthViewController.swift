@@ -76,6 +76,7 @@ extension OAuthViewController: UIWebViewDelegate{
         let code = request.url?.query?.substring(from: "code=".endIndex)
         print("授权码是\(code)")
         
+<<<<<<< HEAD
       NetworkTools.sharedTools.loadAccessToken(code: code!) { (result, error) in
         if error?.error != nil{
             print("出错了")
@@ -87,23 +88,43 @@ extension OAuthViewController: UIWebViewDelegate{
        
         self.loadUserInfo(account: account)
     
+=======
+      NetworkTools.sharedTools.loadAccessToken(code: code!) { (result, error) -> ()in
+        if error != nil{
+            print("出错了")
+            return
+        }
+        
+        let account = UserAccount(dict: result as! [String : AnyObject])
+        print(account)
+>>>>>>> b11f3026ed22a46246da08739a2d0373025507e7
         }
                 return false
     }
     private func loadUserInfo(account:UserAccount){
+<<<<<<< HEAD
         NetworkTools.sharedTools.loadUserInfo(uid: account.uid!, accessToken: account.access_token!) { (result, error) in
             if error?.error != nil{
+=======
+        NetworkTools.sharedTools.loadUserInfo(uid: account.uid!, accessToken: account.access_token!) { (result, error) -> ()in
+            if error != nil{
+>>>>>>> b11f3026ed22a46246da08739a2d0373025507e7
                 print("加载用户出错了")
                 return
             }
             //做出判断1. result 一定要有内容 2. 一定是字典
             guard let dict = result as? [String:AnyObject] else{
+<<<<<<< HEAD
                 print("格式错误")
                 return
             }
             account.screen_name = dict["screen_name"] as? String
             account.avatar_large = dict["avatar_large"] as? String
             print(account)
+=======
+                print("")
+            }
+>>>>>>> b11f3026ed22a46246da08739a2d0373025507e7
         }
     }
 }
