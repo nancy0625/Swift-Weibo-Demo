@@ -5,7 +5,6 @@
 //  Created by apple on 17/10/18.
 //  Copyright © 2017年 Student. All rights reserved.
 //
-
 import UIKit
 
 class OAuthViewController: UIViewController{
@@ -29,10 +28,10 @@ class OAuthViewController: UIViewController{
         super.viewDidLoad()
         // 加载页面
         self.webView.loadRequest(NSURLRequest(url: NetworkTools.sharedTools.OAuthURL as URL) as URLRequest)
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,17 +41,17 @@ class OAuthViewController: UIViewController{
         webView.stringByEvaluatingJavaScript(from: js)
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 extension OAuthViewController: UIWebViewDelegate{
     ///将要加载请求的代理方法
@@ -68,7 +67,7 @@ extension OAuthViewController: UIWebViewDelegate{
         //2. 从url中查询“code＝”后面的代码
         guard let query = url.query,query.hasPrefix("code=") else{
             print("取消授权")
-           
+            
             return false
         }
         //3.从query字符串中提取“code＝”后面的授权代码   代码到此处。url中一定有 查询到自负，并且包含code=
@@ -76,55 +75,34 @@ extension OAuthViewController: UIWebViewDelegate{
         let code = request.url?.query?.substring(from: "code=".endIndex)
         print("授权码是\(code)")
         
-<<<<<<< HEAD
-      NetworkTools.sharedTools.loadAccessToken(code: code!) { (result, error) in
-        if error?.error != nil{
-            print("出错了")
-            return
+        NetworkTools.sharedTools.loadAccessToken(code: code!) { (result, error) in
+            if error?.error != nil{
+                print("出错了")
+                return
+            }
+            print(result!)
+            let test = result as! [String:Any]
+            let account = UserAccount(dict: result as! [String : AnyObject])
+            
+            self.loadUserInfo(account: account)
+            
         }
-        print(result!)
-        let test = result as! [String:Any]
-        let account = UserAccount(dict: result as! [String : AnyObject])
-       
-        self.loadUserInfo(account: account)
-    
-=======
-      NetworkTools.sharedTools.loadAccessToken(code: code!) { (result, error) -> ()in
-        if error != nil{
-            print("出错了")
-            return
-        }
-        
-        let account = UserAccount(dict: result as! [String : AnyObject])
-        print(account)
->>>>>>> b11f3026ed22a46246da08739a2d0373025507e7
-        }
-                return false
+        return false
     }
     private func loadUserInfo(account:UserAccount){
-<<<<<<< HEAD
         NetworkTools.sharedTools.loadUserInfo(uid: account.uid!, accessToken: account.access_token!) { (result, error) in
             if error?.error != nil{
-=======
-        NetworkTools.sharedTools.loadUserInfo(uid: account.uid!, accessToken: account.access_token!) { (result, error) -> ()in
-            if error != nil{
->>>>>>> b11f3026ed22a46246da08739a2d0373025507e7
                 print("加载用户出错了")
                 return
             }
             //做出判断1. result 一定要有内容 2. 一定是字典
             guard let dict = result as? [String:AnyObject] else{
-<<<<<<< HEAD
                 print("格式错误")
                 return
             }
             account.screen_name = dict["screen_name"] as? String
             account.avatar_large = dict["avatar_large"] as? String
             print(account)
-=======
-                print("")
-            }
->>>>>>> b11f3026ed22a46246da08739a2d0373025507e7
         }
     }
 }
