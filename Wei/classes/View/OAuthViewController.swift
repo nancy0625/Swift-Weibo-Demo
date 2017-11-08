@@ -76,7 +76,7 @@ extension OAuthViewController: UIWebViewDelegate{
         print("授权码是\(code)")
         
         NetworkTools.sharedTools.loadAccessToken(code: code!) { (result, error) in
-            if error?.error != nil{
+            if error != nil{
                 print("出错了")
                 return
             }
@@ -91,7 +91,7 @@ extension OAuthViewController: UIWebViewDelegate{
     }
     private func loadUserInfo(account:UserAccount){
         NetworkTools.sharedTools.loadUserInfo(uid: account.uid!, accessToken: account.access_token!) { (result, error) in
-            if error?.error != nil{
+            if error != nil{
                 print("加载用户出错了")
                 return
             }

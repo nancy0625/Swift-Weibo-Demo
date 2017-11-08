@@ -59,7 +59,8 @@ class UserAccount: NSObject,NSCoding{
     func saveUSerAccount(){
         //保存路径
         var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
-        path = (path as NSString).appendingPathComponent("account.plist")
+        //path = (path as NSString).appendingPathComponent("account.plist")
+        path = (path as NSString).strings(byAppendingPaths: ["account.plist"]).last!
         //在实际开发中，一定要确认文件真的保存好了
         print(path)
         //归档保存

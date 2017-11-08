@@ -25,7 +25,7 @@ class NetworkTools: AFHTTPSessionManager {
         return tools
     }()
     //网络请求回调
-    typealias HMRequestCallBack = (Any?,URLSessionDataTask?)->()
+    typealias HMRequestCallBack = (Any?,Error?)->()
     
     
 }
