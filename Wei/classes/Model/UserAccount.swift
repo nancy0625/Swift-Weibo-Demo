@@ -19,14 +19,16 @@ class UserAccount: NSObject,NSCoding{
     var avatar_large:String?
     // access_token 的生命周期，单位是秒数
     
-    
+    //json数据通过 封装字典 转化为模型
     init(dict:[String:AnyObject]) {
         super.init()
         self.setValuesForKeys(dict)
     }
+    //remind_in在模型里不会被用到   需要重写  处理不存在key的方法  重写kvc方法
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
     override var description: String{
+        
         let keys = ["access_token","expires_in","expiresDate","uid","screen_name","avatar_large"]
         return dictionaryWithValues(forKeys: keys).description
     }
