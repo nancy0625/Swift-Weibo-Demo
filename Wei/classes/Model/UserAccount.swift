@@ -22,7 +22,7 @@ class UserAccount: NSObject,NSCoding{
     
     init(dict:[String:AnyObject]) {
         super.init()
-        setValuesForKeys(dict)
+        self.setValuesForKeys(dict)
     }
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     

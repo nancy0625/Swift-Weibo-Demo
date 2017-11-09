@@ -75,22 +75,34 @@ extension OAuthViewController: UIWebViewDelegate{
         let code = request.url?.query?.substring(from: "code=".endIndex)
         print("授权码是\(code)")
         
-        NetworkTools.sharedTools.loadAccessToken(code: code!) { (result, error) in
+        /**NetworkTools.sharedTools.loadAccessToken(code: code!) { (result, error) in
             if error != nil{
                 print("出错了")
                 return
             }
             print(result!)
-            let test = result as! [String:Any]
+            let test = result as! [String:AnyObject]
             let account = UserAccount(dict: result as! [String : AnyObject])
             
             self.loadUserInfo(account: account)
             
+        }*/
+        UserAccountViewModel.sharedUserAccount.loadAccessToken(code: code!){
+            (isSuccessed)->() in
+            if isSuccessed 
+            {
+                print("成功了")
+                print(UserAccountViewModel.sharedUserAccount.account!)
+            }
+            else
+            {
+                print("失败了")
+            }
         }
         return false
     }
     private func loadUserInfo(account:UserAccount){
-        NetworkTools.sharedTools.loadUserInfo(uid: account.uid!, accessToken: account.access_token!) { (result, error) in
+        NetworkTools.sharedTools.loadUserInfo(uid: account.uid!/**, accessToken: account.access_token!*/) { (result, error) in
             if error != nil{
                 print("加载用户出错了")
                 return

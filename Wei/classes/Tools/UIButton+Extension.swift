@@ -17,7 +17,7 @@ extension UIButton{
         //设置图像
         setImage(UIImage(named:iamgeName), for: .normal)
         setImage(UIImage(named:iamgeName + "_higlighted"),for:.highlighted)
-        //设置按钮北京图像
+        //设置按钮背景图像
         setBackgroundImage(UIImage(named:backImageName!), for: .normal)
         setBackgroundImage(UIImage(named:backImageName!+"_higlighted"), for: .highlighted)
         //会根据北京图片的大小调整尺寸

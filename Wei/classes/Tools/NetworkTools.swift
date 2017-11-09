@@ -37,7 +37,8 @@ extension NetworkTools{
     {
         let success = {(task:URLSessionDataTask?,result:Any?)->()
             in finished(result,nil)}
-        let failure = {(task:URLSessionDataTask?,error:Error?)->() in finished(error,nil)}
+        let failure = {(task:URLSessionDataTask?,error:Error?)->()
+            in finished(error,nil)}
         if method == HMRequestMethod.GET
         {
             get(URLString,parameters:parameters,progress: nil,
@@ -75,11 +76,28 @@ extension NetworkTools{
         request(method: .POST, URLString: urlString, parameters: params, finished: finished)
     }
     //加载用户信息
-    func loadUserInfo(uid:String,accessToken:String,finished:@escaping HMRequestCallBack){
-        let urlString = "https://api.weibo.com/2/users/show.json"
-        let params:[String:AnyObject]?=["uid":uid as AnyObject,"access_token":accessToken as AnyObject]
+    func loadUserInfo(uid:String,/**accessToken:String,*/finished:@escaping HMRequestCallBack){
         
-        request(method: .GET, URLString: urlString, parameters: params as [String : AnyObject]?, finished: finished)
+        guard var params = tokenDict else{
+            finished(nil,NSError(domain: "cn.itcast.error", code: -1001, userInfo: ["message":"token is nil"]))
+            
+            return
+            
+        }
+        
+        
+        let urlString = "https://api.weibo.com/2/users/show.json"
+        //let params:[String:AnyObject]?=["uid":uid as AnyObject/**,"access_token":accessToken as AnyObject*/]
+        params["uid"]=uid as AnyObject?
+        
+        request(method: .GET, URLString: urlString, parameters: params, finished: finished)
+    }
+    public var tokenDict:[String:AnyObject]?{
+        if let token = UserAccountViewModel.sharedUserAccount.account?.access_token
+        {
+            return["access_token":token as AnyObject]
+        }
+        return nil
     }
     
 }

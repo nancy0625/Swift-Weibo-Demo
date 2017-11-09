@@ -11,7 +11,7 @@ class UserAccountViewModel{
     var account: UserAccount?
   
     public var accountPath:String{
-                var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
+                let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
         
                 return (path as NSString).strings(byAppendingPaths: ["account.plist"]).last!
           }
@@ -48,34 +48,53 @@ class UserAccountViewModel{
 extension UserAccountViewModel{
     func loadAccessToken(code:String,finished:@escaping(_ isSuccessed:Bool)->()){
     
-    NetworkTools.sharedTools.loadAccessToken(code: code) { (result, error) in
-    if error != nil{
-    print("出错了")
-        finished(false)
-    return
-    }
+    NetworkTools.sharedTools.loadAccessToken(code: code)
+        { (result, error) in
+           if error != nil{
+               print("出错了")
+               finished(false)
+                return
+            }
    
-        self.account = UserAccount(dict:result as![String:Any] as [String : AnyObject])
+        self.account = UserAccount(dict:result as![String:AnyObject])
+        //print(account?.description)
     
         self.loadUserInfo(account: self.account!,finished:finished)
     
+         }
     }
-    }
+    
+    
     private func loadUserInfo(account:UserAccount,finished:@escaping(_ isSuccessed:Bool)->()){
-        NetworkTools.sharedTools.loadUserInfo(uid: account.uid!, accessToken: account.access_token!) { (result, error) in
+        NetworkTools.sharedTools.loadUserInfo(uid: account.uid!/**, accessToken: account.access_token!*/)
+        { (result, error) in
             if error != nil{
                 print("加载用户出错了")
+                finished(false)
                 return
             }
             //做出判断1. result 一定要有内容 2. 一定是字典
             guard let dict = result as? [String:AnyObject] else{
                 print("格式错误")
+                finished(false)
                 return
             }
+            //将用户信息保存
             account.screen_name = dict["screen_name"] as? String
             account.avatar_large = dict["avatar_large"] as? String
-            print(account)
+            //保存对象  会调用对象的encodeWithCoder方法
+            NSKeyedArchiver.archiveRootObject(account, toFile: self.accountPath)
+            print(self.accountPath)
+            //完成回调
+            finished(true)
         }
+    }
+    var access_token:String?{
+        //如果token没有过期，返回account中的token属性
+        if !isExpired {
+            return account?.access_token
+        }
+        return nil
     }
 
     
