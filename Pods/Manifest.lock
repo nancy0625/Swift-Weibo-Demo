@@ -14,13 +14,16 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - SnapKit (3.0.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - SnapKit (~> 3.0.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
 
-PODFILE CHECKSUM: d4f224ce6f051f3c5a4d9c6ad158dedb88384fa3
+PODFILE CHECKSUM: a14baff4460233b8060d02ae99b4df59e571d79a
 
 COCOAPODS: 1.4.0.beta.1

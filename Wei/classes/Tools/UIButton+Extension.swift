@@ -20,7 +20,15 @@ extension UIButton{
         //设置按钮背景图像
         setBackgroundImage(UIImage(named:backImageName!), for: .normal)
         setBackgroundImage(UIImage(named:backImageName!+"_higlighted"), for: .highlighted)
-        //会根据北京图片的大小调整尺寸
+        //会根据背景图片的大小调整尺寸
+        sizeToFit()
+    }
+    convenience init(title:String,color:UIColor,imageName:String)
+    {
+        self.init()
+        setTitle(title, for: .normal)
+        setTitleColor(color, for: .normal)
+        setBackgroundImage(UIImage(named:imageName), for: .normal)
         sizeToFit()
     }
 }
